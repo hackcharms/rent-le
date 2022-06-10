@@ -15,9 +15,18 @@ class AuthenticatedSessionController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function createUser()
     {
-        return view('auth.login');
+        return view('auth.user-login');
+    }
+    /**
+     * Display the login view.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function createCompany()
+    {
+        return view('auth.company-login');
     }
 
     /**
@@ -26,7 +35,21 @@ class AuthenticatedSessionController extends Controller
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(LoginRequest $request)
+    public function storeUser(LoginRequest $request)
+    {
+        $request->authenticate();
+
+        $request->session()->regenerate();
+
+        return redirect()->intended(RouteServiceProvider::HOME);
+    }
+    /**
+     * Handle an incoming authentication request.
+     *
+     * @param  \App\Http\Requests\Auth\LoginRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function storeCompany(LoginRequest $request)
     {
         $request->authenticate();
 
