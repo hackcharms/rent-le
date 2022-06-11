@@ -23,6 +23,9 @@ class User extends Authenticatable
         'password',
     ];
 
+    const   TYPE_COMPANY=1,
+            TYPE_USER=2;
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -41,4 +44,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeCompany($query){
+        return $query->where('user_type',self::TYPE_COMPANY);
+    }
+    public function scopeUser($query){
+        return $query->where('user_type',self::TYPE_USER);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class,'id');
+    }
+    public function vehicles(){
+        return $this->hasMany(Vehicle::class,'id');
+    }
 }

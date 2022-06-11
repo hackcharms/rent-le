@@ -7,6 +7,10 @@
             </a>
         </x-slot>
 
+        <div class="text-xl uppercase text-blue-500 py-4">
+            Login as User
+        </div>
+
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 

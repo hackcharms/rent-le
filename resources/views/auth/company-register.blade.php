@@ -6,9 +6,13 @@
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
             </a>
         </x-slot>
+                <div class="text-xl uppercase text-blue-500 py-4">
+            Register as Company
+        </div>
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
 
         <form method="POST" action="{{ route('register.company') }}">
             @csrf
