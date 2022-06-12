@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
 use App\Models\Vehicle;
+use Illuminate\Support\Facades\Auth;
 
 class VehicleController extends Controller
 {
@@ -15,7 +16,9 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('viewAny',Vehicle::class);
+        $vehicles=Auth::user()->vehicles()->paginate(20);
+        return view('vehicle.index',compact(['vehicles']));
     }
 
     /**
@@ -25,7 +28,8 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create',Vehicle::class);
+        return view('vehicle.create');
     }
 
     /**
@@ -36,7 +40,11 @@ class VehicleController extends Controller
      */
     public function store(StoreVehicleRequest $request)
     {
-        //
+        $this->authorize('store',Vehicle::class);
+        $vehicle=new Vehicle();
+        $vehicle->forceFill($request->validated());
+        $vehicle->save();
+        return route('vehicle.index');
     }
 
     /**
@@ -47,7 +55,8 @@ class VehicleController extends Controller
      */
     public function show(Vehicle $vehicle)
     {
-        //
+        $this->authorize('show',$vehicle);
+        return view('vehicle.show',$vehicle);
     }
 
     /**
@@ -58,7 +67,8 @@ class VehicleController extends Controller
      */
     public function edit(Vehicle $vehicle)
     {
-        //
+        $this->authorize('edit',$vehicle);
+        return view('vehicle.edit', $vehicle);
     }
 
     /**
@@ -70,7 +80,10 @@ class VehicleController extends Controller
      */
     public function update(UpdateVehicleRequest $request, Vehicle $vehicle)
     {
-        //
+        $this->authorize('update',$vehicle);
+        $vehicle->forceFill($request->validated());
+        $vehicle->save();
+        return view('vehicle.show',$vehicle);
     }
 
     /**
@@ -81,6 +94,8 @@ class VehicleController extends Controller
      */
     public function destroy(Vehicle $vehicle)
     {
-        //
+        $this->authorize('destroy',$vehicle);
+        $vehicle->delete();
+        return redirect()->route('vehicle.index');
     }
 }

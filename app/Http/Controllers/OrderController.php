@@ -15,7 +15,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('viewAny',Order::class);
+        $orders=Auth::user()->orders()->paginate(20);
+        return view('order.index',compact('orders'));
     }
 
     /**
@@ -25,7 +27,8 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', Order::class);
+        return view('order.create');
     }
 
     /**
@@ -36,7 +39,11 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        //
+        $this->authorize('store', Order::class);
+        $order=new Order();
+        $order->forceFill($request->validated());
+        $order->save();
+        return redirect()->route('order.show',compact('order'));
     }
 
     /**
@@ -47,7 +54,8 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        $this->authorize('show', $order);
+        return view('order.show',compact('order'));
     }
 
     /**
@@ -58,7 +66,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $this->authorize('edit', $order);
+        return view('order.edit', compact('order'));
     }
 
     /**
@@ -70,7 +79,10 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        //
+        $this->authorize('update', $order);
+        $order->forceFill($request->validated());
+        $order->save();
+        return view('order.show', compact('order'));
     }
 
     /**
@@ -81,6 +93,8 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $this->authorize('destroy', $order);
+        $order->delete();
+        return redirect()->route('order.index');
     }
 }

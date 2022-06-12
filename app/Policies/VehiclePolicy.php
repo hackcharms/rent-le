@@ -18,7 +18,7 @@ class VehiclePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class VehiclePolicy
      */
     public function view(User $user, Vehicle $vehicle)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class VehiclePolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->user_type===User::TYPE_COMPANY;
     }
 
     /**
@@ -53,7 +53,7 @@ class VehiclePolicy
      */
     public function update(User $user, Vehicle $vehicle)
     {
-        //
+        return $user->user_type===User::TYPE_COMPANY;
     }
 
     /**
@@ -65,7 +65,7 @@ class VehiclePolicy
      */
     public function delete(User $user, Vehicle $vehicle)
     {
-        //
+        return $user->user_type===User::TYPE_COMPANY;
     }
 
     /**
@@ -75,10 +75,10 @@ class VehiclePolicy
      * @param  \App\Models\Vehicle  $vehicle
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Vehicle $vehicle)
-    {
-        //
-    }
+    // public function restore(User $user, Vehicle $vehicle)
+    // {
+    //     //
+    // }
 
     /**
      * Determine whether the user can permanently delete the model.
@@ -87,8 +87,8 @@ class VehiclePolicy
      * @param  \App\Models\Vehicle  $vehicle
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Vehicle $vehicle)
-    {
-        //
-    }
+    // public function forceDelete(User $user, Vehicle $vehicle)
+    // {
+    //     //
+    // }
 }
