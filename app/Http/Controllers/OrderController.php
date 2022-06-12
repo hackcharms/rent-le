@@ -16,8 +16,9 @@ class OrderController extends Controller
     public function index()
     {
         $this->authorize('viewAny',Order::class);
-        $orders=Auth::user()->orders()->paginate(20);
-        return view('order.index',compact('orders'));
+        $orders=\Auth::user()->orders()->with(['user','vehicle'])->paginate(20);
+        $label="Your Orders";
+        return view('order.index',compact('orders','label'));
     }
 
     /**

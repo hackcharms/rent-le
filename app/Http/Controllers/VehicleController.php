@@ -55,8 +55,8 @@ class VehicleController extends Controller
      */
     public function show(Vehicle $vehicle)
     {
-        $this->authorize('show',$vehicle);
-        return view('vehicle.show',$vehicle);
+        $this->authorize('view',$vehicle);
+        return view('vehicle.show',compact('vehicle'));
     }
 
     /**
