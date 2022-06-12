@@ -43,7 +43,7 @@
                                     </div>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <a href="" class="text-gray-900 whitespace-no-wrap">{{$order->vehicle->model}}</a>
+                                    <a href="{{route('vehicle.show',$order->vehicle)}}" class="text-gray-900 whitespace-no-wrap">{{$order->vehicle->model}}</a>
                                 </td>
 
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -55,7 +55,7 @@
                                     <p class="text-gray-900 whitespace-no-wrap">{{$order->rent_expired_at}}</p>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    @if ($order->available)
+                                    @if ($order->rent_expired_at->greaterThan(now()))
                                     <span
                                         class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                         <span aria-hidden
@@ -82,7 +82,9 @@
                             @empty
                             <tr>
                                 <td colspan="100%">
-                                    No data found
+                                    <p class="p-2">
+                                        No data found
+                                    </p>
                                 </td>
                             </tr>
                             @endforelse

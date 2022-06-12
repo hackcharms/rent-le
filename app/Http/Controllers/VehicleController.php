@@ -108,19 +108,19 @@ class VehicleController extends Controller
         return redirect()->route('vehicle.index');
     }
 
-    /**
-     * Book Vehicles.
-     *
-     * @param  \App\Models\Vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
-    public function book(Vehicle $vehicle,VehicleBookRequest $request)
-    {
-        $this->authorize('book',$vehicle);
-        $user=Auth::user();
-        $order=$user->orders()->make();
-        $order->rent_expired_at=$request->validated('days');
-        VehicleBooked::dispatch($vehicle);
-        return redirect()->route('order.index');
-    }
+    // /**
+    //  * Book Vehicles.
+    //  *
+    //  * @param  \App\Models\Vehicle  $vehicle
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function book(Vehicle $vehicle,VehicleBookRequest $request)
+    // {
+    //     $this->authorize('book',$vehicle);
+    //     $user=Auth::user();
+    //     $order=$user->orders()->make();
+    //     $order->rent_expired_at=$request->validated('days');
+    //     VehicleBooked::dispatch($vehicle);
+    //     return redirect()->route('order.index');
+    // }
 }

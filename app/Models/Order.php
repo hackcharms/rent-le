@@ -9,8 +9,11 @@ class Order extends Model
 {
     use HasFactory;
 
+    public $casts=[
+        "rent_expired_at"=>"datetime"
+    ];
     public function vehicle(){
-        return $this->belongsTo(Vehicle::class);
+        return $this->belongsTo(Vehicle::class,'vehicle_id');
     }
 
     public function user(){

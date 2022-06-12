@@ -43,14 +43,16 @@ class OrderController extends Controller
      */
     public function store(Vehicle $vehicle,StoreOrderRequest $request)
     {
-        dd($vehicle,$request);
         $this->authorize('create', Order::class);
         $user=Auth::user();
-        $order=$user->orders();
-        $order->forceFill($request->validated());
+        $order=$user->orders()->make();
+        $order->rent_expired_at=now()->addDays($request->validated('days'));
+        $order->vehicle_id=$vehicle->id;
         $order->save();
+        $vehicle->available=Vehicle::TAKEN;
+        $vehicle->save();
         VehicleBooked::dispatch($vehicle);        
-        return redirect()->route('order.show',compact('order'));
+        return redirect()->route('order.index');
     }
 
     /**

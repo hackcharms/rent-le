@@ -21,15 +21,12 @@ class Vehicle extends Model
     }
 
 
-    public function scopeBooked($query){
+    public function scopeAvailable($query){
         return $query->where('available',self::AVAILABLE);
     }
-    public function scopeAvailable($query){
+    public function scopeTaken($query){
         return $query->where('available',self::TAKEN);
     }
-
-
-
 
     public function Number():Attribute
     {
