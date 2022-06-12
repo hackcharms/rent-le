@@ -41,7 +41,7 @@ class VehiclePolicy
      */
     public function create(User $user)
     {
-        return $user->user_type===User::TYPE_COMPANY;
+        return $user->type===User::TYPE_COMPANY;
     }
 
     /**
@@ -53,7 +53,7 @@ class VehiclePolicy
      */
     public function update(User $user, Vehicle $vehicle)
     {
-        return $user->user_type===User::TYPE_COMPANY;
+        return $user->type===User::TYPE_COMPANY;
     }
 
     /**
@@ -65,7 +65,7 @@ class VehiclePolicy
      */
     public function delete(User $user, Vehicle $vehicle)
     {
-        return $user->user_type===User::TYPE_COMPANY;
+        return $user->type===User::TYPE_COMPANY;
     }
 
     /**

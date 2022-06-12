@@ -50,7 +50,7 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
-            'user_type'=>User::TYPE_COMPANY,
+            'type'=>User::TYPE_COMPANY,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -80,7 +80,7 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
-            'user_type'=>User::TYPE_COMPANY,
+            'type'=>User::TYPE_COMPANY,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);

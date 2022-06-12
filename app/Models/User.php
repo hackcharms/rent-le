@@ -21,7 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'user_type'
+        'type'
     ];
 
     const   TYPE_COMPANY=1,
@@ -47,10 +47,10 @@ class User extends Authenticatable
     ];
 
     public function scopeCompany($query){
-        return $query->where('user_type',self::TYPE_COMPANY);
+        return $query->where('type',self::TYPE_COMPANY);
     }
     public function scopeUser($query){
-        return $query->where('user_type',self::TYPE_USER);
+        return $query->where('type',self::TYPE_USER);
     }
 
     public function orders()
