@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('model',50);
             $table->string('number',50);
             $table->string('image');
+            $table->boolean('available')->default(0);
             $table->integer('seating_capacity');
             $table->float('rent_per_day',8,2,true);
             $table->foreignId('owner_id')->constrained('users','id');

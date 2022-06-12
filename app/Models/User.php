@@ -58,6 +58,6 @@ class User extends Authenticatable
         return $this->hasMany(Order::class,'id');
     }
     public function vehicles(){
-        return $this->hasMany(Vehicle::class,'id');
+        return $this->hasMany(Vehicle::class,'owner_id');
     }
 }

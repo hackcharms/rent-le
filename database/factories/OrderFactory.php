@@ -17,7 +17,7 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'rent_expired_at'=>now()->addDays(random_int(1,20)),
         ];
     }
 }
