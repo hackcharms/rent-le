@@ -3,21 +3,21 @@
 <link rel="stylesheet" href="https://cdn.tailgrids.com/tailgrids-fallback.css" />
 
 <!-- ====== Cards Section Start -->
-<section class="p-4 bg-[#F3F4F6]">
+<section class="p-6 bg-[#F3F4F6]">
    <div class="container">
       <div class="flex flex-wrap -mx-4">
-          @forelse ([1,2,3] as $vehicle)
+          @forelse ($vehicles as $vehicle)
             <div class="w-full md:w-1/2 xl:w-1/3 px-4">
-                <div class="bg-white rounded-lg overflow-hidden mb-10">
+                <div class="bg-white rounded-lg overflow-hidden py-2 mb-10">
                     <img
-                    src="https://cdn.tailgrids.com/1.0/assets/images/cards/card-01/image-01.jpg"
+                    src="{{$vehicle->image}}"
                     alt="image"
                     class="w-full"
                     />
                     <div class="p-8 sm:p-9 md:p-7 xl:p-9 text-center">
                     <h3>
                         <a
-                            href="javascript:void(0)"
+                            href="{{route('vehicle.show',$vehicle)}}"
                             class="
                             font-semibold
                             text-dark text-xl
@@ -31,15 +31,14 @@
                             hover:text-primary
                             "
                             >
-                        50+ Best creative website themes & templates
+                        {{$vehicle->model}}
                         </a>
                     </h3>
                     <p class="text-base text-body-color leading-relaxed mb-7">
-                        Lorem ipsum dolor sit amet pretium consectetur adipiscing
-                        elit. Lorem consectetur adipiscing elit.
+                        {{$vehicle->number}}
                     </p>
                     <a
-                        href="javascript:void(0)"
+                        href="{{route('vehicle.show',$vehicle)}}"
                         class="
                         inline-block
                         py-2
@@ -70,6 +69,9 @@
             </div>
           @endforelse
       </div>
+      <div class="w-full px-2">
+          {{$vehicles->links()}}
+        </div>
    </div>
 </section>
 <!-- ====== Cards Section End -->

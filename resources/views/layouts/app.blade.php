@@ -28,7 +28,7 @@
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="px-8">
                 @yield('section')
             </main>
         </div>

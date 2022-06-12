@@ -17,7 +17,7 @@ class VehicleController extends Controller
     public function index()
     {
         $this->authorize('viewAny',Vehicle::class);
-        $vehicles=Auth::user()->vehicles()->paginate(20);
+        $vehicles=Auth::user()->vehicles()->paginate(1);
         return view('vehicle.index',compact(['vehicles']));
     }
 
