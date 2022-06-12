@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
+use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,13 @@ class VehicleController extends Controller
     public function index()
     {
         $this->authorize('viewAny',Vehicle::class);
-        $vehicles=Auth::user()->vehicles()->paginate(1);
+        $user=\Auth::user();
+        $vehicles=null;
+        if($user->type==User::TYPE_USER){
+            $vehicles=Vehicle::available()->with('orders')->paginate(20);
+        }else{
+            $vehicles=$user->vehicles()->with('orders')->paginate(20);
+        }
         return view('vehicle.index',compact(['vehicles']));
     }
 
