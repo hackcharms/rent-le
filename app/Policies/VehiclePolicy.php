@@ -30,9 +30,12 @@ class VehiclePolicy
      */
     public function view(User $user, Vehicle $vehicle)
     {
-        return true;
+        if($user->type==User::TYPE_USER){
+            return true;
+        }
+        return $user->id==$vehicle->owner_id;
     }
-
+    
     /**
      * Determine whether the user can create models.
      *
@@ -53,7 +56,7 @@ class VehiclePolicy
      */
     public function update(User $user, Vehicle $vehicle)
     {
-        return $user->type===User::TYPE_COMPANY;
+        return $user->type===User::TYPE_COMPANY&&$user->id==$vehicle->owner_id;
     }
 
     /**
@@ -65,7 +68,7 @@ class VehiclePolicy
      */
     public function delete(User $user, Vehicle $vehicle)
     {
-        return $user->type===User::TYPE_COMPANY;
+        return $user->type===User::TYPE_COMPANY&&$user->id==$vehicle->owner_id;
     }
 
     /**
