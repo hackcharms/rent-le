@@ -41,7 +41,7 @@ class OrderPolicy
      */
     public function create(User $user)
     {
-        return true;
+        return $user->type===User::TYPE_USER ;
     }
 
     /**

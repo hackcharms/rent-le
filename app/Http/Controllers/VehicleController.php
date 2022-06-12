@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\VehicleBooked;
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
+use App\Http\Requests\VehicleBookRequest;
 use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\Auth;
@@ -104,5 +106,21 @@ class VehicleController extends Controller
         $this->authorize('destroy',$vehicle);
         $vehicle->delete();
         return redirect()->route('vehicle.index');
+    }
+
+    /**
+     * Book Vehicles.
+     *
+     * @param  \App\Models\Vehicle  $vehicle
+     * @return \Illuminate\Http\Response
+     */
+    public function book(Vehicle $vehicle,VehicleBookRequest $request)
+    {
+        $this->authorize('book',$vehicle);
+        $user=Auth::user();
+        $order=$user->orders()->make();
+        $order->rent_expired_at=$request->validated('days');
+        VehicleBooked::dispatch($vehicle);
+        return redirect()->route('order.index');
     }
 }

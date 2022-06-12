@@ -47,7 +47,7 @@
                         rounded-full
                         text-base text-body-color
                         font-medium
-                        hover:border-primary hover:bg-primary hover:text-white
+                        hover:border-blue-400 hover:bg-blue-400 hover:text-white
                         transition
                         "
                         >

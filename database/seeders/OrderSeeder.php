@@ -21,7 +21,8 @@ class OrderSeeder extends Seeder
         $vehicles=Vehicle::available()->limit(10)->get();
         $vehicles->each(function($vehicle)use($users){
             return $vehicle->orders()->make([
-                "user_id"=>$users->random()->id,
+                "user_id"=>$users
+                ->random()->id,
                 'rent_expired_at'=>now()->addDays(rand(1,20))->addHours(rand(1,20))
             ])->save();
         });

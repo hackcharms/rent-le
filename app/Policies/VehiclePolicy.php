@@ -71,6 +71,7 @@ class VehiclePolicy
         return $user->type===User::TYPE_COMPANY&&$user->id==$vehicle->owner_id;
     }
 
+
     /**
      * Determine whether the user can restore the model.
      *

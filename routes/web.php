@@ -24,18 +24,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 Route::middleware(['auth'])->group(function(){
-    // Route::middleware('company')->group(function(){
-    // Route::controller(VehicleController::class)->prefix('vehicle')->name('vehicle.')->group(function(){
-    //     Route::get('/','index')->name('index');
-    //     Route::get('/','show')->name('show');
-    //     Route::get('/','show')->name('show');
-    // });
-    Route::resource('order',OrderController::class);
-    Route::resource('vehicle',VehicleController::class);
-    // Route::middleware('user')->group(function(){
-
-    // });
-// });
+    Route::resource('order',OrderController::class)->except(['store']);
+    Route::post('order/{vehicle}',[OrderController::class,'store'])->name('order.store');
+    Route::resource('vehicle',VehicleController::class)->except(['show']);
 });
+Route::get('vehicle/{vehicle}',[VehicleController::class,'show'])->name('vehicle.show');
 
 require __DIR__.'/auth.php';

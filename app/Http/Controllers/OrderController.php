@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\VehicleBooked;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Order;
+use App\Models\Vehicle;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -38,12 +41,15 @@ class OrderController extends Controller
      * @param  \App\Http\Requests\StoreOrderRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOrderRequest $request)
+    public function store(Vehicle $vehicle,StoreOrderRequest $request)
     {
-        $this->authorize('store', Order::class);
-        $order=new Order();
+        dd($vehicle,$request);
+        $this->authorize('create', Order::class);
+        $user=Auth::user();
+        $order=$user->orders();
         $order->forceFill($request->validated());
         $order->save();
+        VehicleBooked::dispatch($vehicle);        
         return redirect()->route('order.show',compact('order'));
     }
 
