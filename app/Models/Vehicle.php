@@ -42,5 +42,12 @@ class Vehicle extends Model
             set:fn($value)=>strtoupper($value),
         );
     }
+    public function Image():Attribute
+    {
+        return Attribute::make(
+            get:fn($value)=>$value??'/images/car'.rand(0,7).'.jpeg',
+            // set:fn($value)=>strtoupper($value),
+        );
+    }
 
 }
