@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class OrderController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the Orders.
      *
      * @return \Illuminate\Http\Response
      */
@@ -23,17 +23,6 @@ class OrderController extends Controller
         $label="Your Orders";
         return view('order.index',compact('orders','label'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function create()
-    // {
-    //     $this->authorize('create', Order::class);
-    //     return view('order.create');
-    // }
 
     /**
      * Store a newly created resource in storage.
