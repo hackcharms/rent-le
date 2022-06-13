@@ -31,6 +31,7 @@
             <main class="px-8">
                 @yield('section')
             </main>
+            @include('layouts.footer')
         </div>
     </body>
 </html>

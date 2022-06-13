@@ -22,7 +22,7 @@ class VehicleController extends Controller
     {
         $user=\Auth::user();
         $vehicles=null;
-        if(Auth::check()||$user->type==User::TYPE_COMPANY){
+        if(Auth::check()&&$user->type==User::TYPE_COMPANY){
             $vehicles=$user->vehicles()->with('orders')->paginate(20);
         }else{
             $vehicles=Vehicle::available()->with('orders')->paginate(20);

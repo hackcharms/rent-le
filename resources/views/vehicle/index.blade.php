@@ -53,11 +53,10 @@
                         rounded-full
                         text-base text-body-color
                         font-medium
-                        hover:border-blue-400 hover:bg-blue-400 hover:text-white
+                        hover:border-blue-400 bg-blue-400 hover:bg-blue-500 text-white
                         transition
-                        ">
-                            View Details
-                        </a>
+                        ">                            View Details
+                    </a>
                     </div>
                 </div>
             </div>

@@ -17,8 +17,10 @@
                 </div>
             </div>
             <div class="flex items-center space-x-8">
+            @can('update',$vehicle)
                 <a href="{{route('vehicle.edit',$vehicle)}}"
                     class="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">Edit Details</a>
+            @endcan
                 <a href="{{route('vehicle.index')}}"
                     class="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">All Vehicles</a>
             </div>
@@ -32,7 +34,7 @@
                     <div class="mb-8 w-full">
                         <form action="{{route('order.store',$vehicle)}}" method="POST">
                             @csrf
-                            <table class="w-full text-xl">
+                            <table class="w-full text-sm md:text-lx">
                                 <tbody>
                                     <tr>
                                         <td class="py-4">Model</td>
@@ -46,7 +48,7 @@
                                         <td class="py-4">Charge/Day</td>
                                         <td>{{$vehicle->rent_per_day}}</td>
                                     </tr>
-                                    <tr>
+                                    <tr class="hidden md:table-row">
                                         <td class="py-4">
                                             <div class="flex">
                                                 <span
@@ -67,22 +69,41 @@
                                             </p>
                                         </td>
                                         <td>
-                                            <button type="submit" class="inline-block py-2
-                                        ml-3
-                                        px-7
-                                        border border-[#E5E7EB]
-                                        rounded-full
-                                        text-base text-body-color
-                                        font-medium
-                                        hover:border-blue-400 hover:bg-blue-400 hover:text-white
-                                        transition
-                                        ">
-                                                Book Now
-                                            </button>
+                                            <x-button-buy-now
+                                            >
+                                            Book Now
+                                            </x-button-buy-now>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="md:hidden">
+                            <div>
+                                <div class="flex justify-center">
+                                    <span
+                                        class="text-sm border-2 rounded-l-lg px-4 py-2 bg-gray-300 whitespace-no-wrap">Days<sup>*</sup>:
+                                    </span>
+                                    <div>
+                                        <input name="days" class="border-2 rounded-r-lg px-4 py-2 w-full
+                                        @error('days')
+                                            border-red-500
+                                        @enderror
+                                        " type="number" placeholder="Number of Days" min="1" />
+                                    </div>
+                                </div>
+                                <p class="text-red-400">
+                                    @error('days')
+                                    {{$message}}
+                                    @enderror
+                                </p>
+
+                            </div>
+                            <div class="flex justify-center my-4">
+                                <x-button-buy-now>
+                                Book Now
+                                </x-button-buy-now>
+                            </div>
+                            </div>
                         </form>
                     </div>
                 </div>
