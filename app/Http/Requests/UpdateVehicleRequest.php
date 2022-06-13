@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateVehicleRequest extends FormRequest
@@ -13,7 +14,7 @@ class UpdateVehicleRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->user()->type===User::TYPE_COMPANY;
     }
 
     /**
@@ -24,7 +25,9 @@ class UpdateVehicleRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'model'=>"required|string",
+            'number'=>"required|string",
+            'rent_per_day'=>"required|numeric",
         ];
     }
 }

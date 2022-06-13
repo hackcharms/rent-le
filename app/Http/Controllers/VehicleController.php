@@ -77,7 +77,7 @@ class VehicleController extends Controller
     public function edit(Vehicle $vehicle)
     {
         $this->authorize('edit',$vehicle);
-        return view('vehicle.edit', $vehicle);
+        return view('vehicle.edit', compact('vehicle'));
     }
 
     /**
