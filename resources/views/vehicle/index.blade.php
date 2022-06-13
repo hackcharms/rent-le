@@ -13,10 +13,12 @@
 
         </div>
     </div>
+    @can('create',App\Models\Vehicle::class)
     <div class="flex items-center space-x-8">
         <a href="{{route('vehicle.create')}}"
             class="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">Add Vehicle</a>
     </div>
+    @endcan
 </div>
 <section class="mt-5 bg-[#F3F4F6]">
     <div class="p-2">
@@ -61,7 +63,7 @@
                 </div>
             </div>
             @empty
-            <div class="flex bg-yellow-100 rounded-lg p-2 text-sm text-yellow-700" role="alert">
+            <div class="flex w-full bg-yellow-100 rounded-lg my-4 p-4 text-sm text-yellow-700" role="alert">
                 <svg class="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
@@ -69,7 +71,7 @@
                         clip-rule="evenodd"></path>
                 </svg>
                 <div>
-                    <span class="font-medium">Warning alert!</span> Change a few things up and try submitting again.
+                    <span class="font-medium">Warning alert!</span> No Data Found.
                 </div>
             </div>
             @endforelse

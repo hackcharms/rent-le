@@ -48,14 +48,14 @@
                                         <td class="py-4">Charge/Day</td>
                                         <td>{{$vehicle->rent_per_day}}</td>
                                     </tr>
-                                    <tr class="hidden md:table-row">
+                                    {{-- <tr class="hidden md:table-row">
                                         <td class="py-4">
                                             <div class="flex">
                                                 <span
                                                     class="text-sm border-2 rounded-l-lg px-4 py-2 bg-gray-300 whitespace-no-wrap">Days<sup>*</sup>
                                                     :</span>
                                                 <div>
-                                                    <input name="days" class="border-2 rounded-r-lg px-4 py-2 w-full
+                                                    <input name="days"  value="{{old('days')}}" class="border-2 rounded-r-lg px-4 py-2 w-full
                                             @error('days')
                                                 border-red-500
                                             @enderror
@@ -74,36 +74,44 @@
                                             Book Now
                                             </x-button-buy-now>
                                         </td>
-                                    </tr>
+                                    </tr> --}}
                                 </tbody>
                             </table>
-                            <div class="md:hidden">
-                            <div>
-                                <div class="flex justify-center">
-                                    <span
-                                        class="text-sm border-2 rounded-l-lg px-4 py-2 bg-gray-300 whitespace-no-wrap">Days<sup>*</sup>:
-                                    </span>
-                                    <div>
-                                        <input name="days" class="border-2 rounded-r-lg px-4 py-2 w-full
-                                        @error('days')
-                                            border-red-500
-                                        @enderror
-                                        " type="number" placeholder="Number of Days" min="1" />
+                            @can('create',App\Models\Order::class)
+                            @if ($vehicle->available)
+                            <div class="md:flex">
+                                <div class="w-full md:w-1/2">
+                                    <div class="flex justify-center md:justify-start">
+                                        <span
+                                            class="text-sm border-2 rounded-l-lg px-4 py-2 bg-gray-300 whitespace-no-wrap">Days<sup>*</sup>:
+                                        </span>
+                                        <div>
+                                            <input name="days" value="{{old('days')}}" class="border-2 rounded-r-lg px-4 py-2 w-full
+                                            @error('days')
+                                                border-red-500
+                                            @enderror
+                                            " type="number" placeholder="Number of Days" min="1" />
+                                        </div>
                                     </div>
-                                </div>
-                                <p class="text-red-400">
-                                    @error('days')
-                                    {{$message}}
-                                    @enderror
-                                </p>
+                                    <p class="text-red-400">
+                                        @error('days')
+                                        {{$message}}
+                                        @enderror
+                                    </p>
 
+                                </div>
+                                <div class="w-full md:w-1/2 flex justify-center items-center md:justify-start my-4">
+                                    <x-button-buy-now>
+                                    Book Now
+                                    </x-button-buy-now>
+                                </div>
                             </div>
-                            <div class="flex justify-center my-4">
-                                <x-button-buy-now>
-                                Book Now
-                                </x-button-buy-now>
-                            </div>
-                            </div>
+                            @else
+                                <p class=" text-center text-red-400">
+                                    This Vehicle is already Booked.
+                                </p>
+                            @endif
+                            @endcan
                         </form>
                     </div>
                 </div>
@@ -178,7 +186,7 @@
                                 <p class="text-gray-900 whitespace-no-wrap">{{$order->rent_expired_at}}</p>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                @if ($order->available)
+                                @if ($order->rent_expired_at->greaterThan(now()))
                                 <span
                                     class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                     <span aria-hidden

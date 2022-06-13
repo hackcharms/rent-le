@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Vehicle;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class OrderPolicy
@@ -30,7 +31,7 @@ class OrderPolicy
      */
     public function view(User $user, Order $order)
     {
-        return true;
+        return false;
     }
 
     /**
@@ -42,6 +43,16 @@ class OrderPolicy
     public function create(User $user)
     {
         return $user->type===User::TYPE_USER ;
+    }
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function store(User $user,Vehicle $vehicle)
+    {
+        return $user->type===User::TYPE_USER && $vehicle->available;
     }
 
     /**
@@ -65,7 +76,7 @@ class OrderPolicy
      */
     public function delete(User $user, Order $order)
     {
-        return true;
+        return false;
     }
 
     /**
@@ -77,7 +88,7 @@ class OrderPolicy
      */
     public function restore(User $user, Order $order)
     {
-        return true;
+        return false;
     }
 
     /**
@@ -89,6 +100,6 @@ class OrderPolicy
      */
     public function forceDelete(User $user, Order $order)
     {
-        return true;
+        return false;
     }
 }

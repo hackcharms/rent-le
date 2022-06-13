@@ -29,11 +29,11 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $this->authorize('create', Order::class);
-        return view('order.create');
-    }
+    // public function create()
+    // {
+    //     $this->authorize('create', Order::class);
+    //     return view('order.create');
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -43,7 +43,7 @@ class OrderController extends Controller
      */
     public function store(Vehicle $vehicle,StoreOrderRequest $request)
     {
-        $this->authorize('create', Order::class);
+        $this->authorize('store', [Order::class,$vehicle]);
         $user=Auth::user();
         $order=$user->orders()->make();
         $order->rent_expired_at=now()->addDays($request->validated('days'));
@@ -51,6 +51,7 @@ class OrderController extends Controller
         $order->save();
         $vehicle->available=Vehicle::TAKEN;
         $vehicle->save();
+        // Dispatch the event if any other operation needs to perform.
         VehicleBooked::dispatch($vehicle);        
         return redirect()->route('order.index');
     }
