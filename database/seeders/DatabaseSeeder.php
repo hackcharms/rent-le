@@ -16,13 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(20)->create()->each(function($user){
-        //     info("user Type",$user->toArray());
-        //     if($user->type===User::TYPE_COMPANY){
-        //         return $user->vehicles()->saveMany(Vehicle::factory(2)->make());
-        //     }
-        // });
-
+        \App\Models\User::factory(20)->create()->each(function($user){
+            info("user Type",$user->toArray());
+            if($user->type===User::TYPE_COMPANY){
+                return $user->vehicles()->saveMany(Vehicle::factory(2)->make());
+            }
+        });
         \App\Models\User::factory()->create([
             'name' => 'Test User',
             'email' => 'user@test.test',
@@ -33,5 +32,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'company@test.test',
             'type'=>User::TYPE_COMPANY
         ]);
+        $this->call([
+            OrderSeeder::class
+        ]);
+
     }
 }
