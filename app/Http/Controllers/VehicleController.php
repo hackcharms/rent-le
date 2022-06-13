@@ -9,6 +9,7 @@ use App\Http\Requests\VehicleBookRequest;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Vehicle;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
 class VehicleController extends Controller
@@ -20,6 +21,9 @@ class VehicleController extends Controller
      */
     public function index()
     {
+        // Hero does not provide free task schedular
+        Artisan::call('rent-le:update-vehicle-status');
+        
         $user=\Auth::user();
         $vehicles=null;
         if(Auth::check()&&$user->type==User::TYPE_COMPANY){
