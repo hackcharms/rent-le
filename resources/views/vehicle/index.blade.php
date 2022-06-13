@@ -8,7 +8,7 @@
         {{-- <div class="h-8 w-8 rounded-full bg-slate-400 bg-[url('https://i.pravatar.cc/32')]"></div> --}}
         <div class="text-lg font-bold text-slate-700">
             <h1 class="text-xl uppercase text-blue-500 py-4">
-                Add Vehicle
+                Vehicles
             </h1>
 
         </div>
