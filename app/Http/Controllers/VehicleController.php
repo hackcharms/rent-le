@@ -6,6 +6,7 @@ use App\Events\VehicleBooked;
 use App\Http\Requests\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
 use App\Http\Requests\VehicleBookRequest;
+use App\Models\Order;
 use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\Auth;
@@ -19,13 +20,12 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny',Vehicle::class);
         $user=\Auth::user();
         $vehicles=null;
-        if($user->type==User::TYPE_USER){
-            $vehicles=Vehicle::available()->with('orders')->paginate(20);
-        }else{
+        if(Auth::check()||$user->type==User::TYPE_COMPANY){
             $vehicles=$user->vehicles()->with('orders')->paginate(20);
+        }else{
+            $vehicles=Vehicle::available()->with('orders')->paginate(20);
         }
         return view('vehicle.index',compact(['vehicles']));
     }
@@ -64,7 +64,7 @@ class VehicleController extends Controller
      */
     public function show(Vehicle $vehicle)
     {
-        $this->authorize('view',$vehicle);
+
         return view('vehicle.show',compact('vehicle'));
     }
 

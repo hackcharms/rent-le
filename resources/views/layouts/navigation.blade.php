@@ -21,9 +21,24 @@
                     <x-nav-link :href="route('order.index')" :active="request()->routeIs('order.*')">
                         {{ __('Orders') }}
                     </x-nav-link>
+                    {{-- @if (Route::has('login'))
+                        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                            @auth
+                                <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                            @else
+                                <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                                @endif
+                            @endauth
+                        </div>
+                    @endif --}}
+
                 </div>
             </div>
 
+            @auth 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
@@ -53,6 +68,17 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @else
+            <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <x-nav-link :href="route('login')" :active="request()->routeIs('login.*')">
+                    {{ __('Login') }}
+                </x-nav-link>
+                <x-nav-link :href="route('register')" :active="request()->routeIs('register.*')">
+                    {{ __('Register') }}
+                </x-nav-link>
+            </div>
+
+            @endauth
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
@@ -81,6 +107,7 @@
         </div>
 
         <!-- Responsive Settings Options -->
+        @auth
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
@@ -100,5 +127,17 @@
                 </form>
             </div>
         </div>
+        @else
+            <x-responsive-nav-link :href="route('login')"
+            :active="request()->routeIs('login.*')"
+            >
+                {{ __('Log In') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('register')"
+            :active="request()->routeIs('register.*')"
+            >
+                {{ __('Register') }}
+            </x-responsive-nav-link>
+        @endauth
     </div>
 </nav>

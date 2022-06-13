@@ -26,8 +26,9 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function(){
     Route::resource('order',OrderController::class)->except(['store']);
     Route::post('order/{vehicle}',[OrderController::class,'store'])->name('order.store');
-    Route::resource('vehicle',VehicleController::class)->except(['show']);
+    Route::resource('vehicle',VehicleController::class)->except(['show','index']);
 });
+Route::get('vehicle',[VehicleController::class,'index'])->name('vehicle.index');
 Route::get('vehicle/{vehicle}',[VehicleController::class,'show'])->name('vehicle.show');
 
 require __DIR__.'/auth.php';
