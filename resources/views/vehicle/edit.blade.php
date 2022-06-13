@@ -39,13 +39,21 @@
                         </div>
 
                         <!-- Number Details -->
-                        <div>
+                        <div title="You can not update Vehicle Number">
                             <x-label for="number" :value="__('Number')" />
             
-                            <x-input id="number" class="block mt-1 w-full" type="text" name="number" value="{{$vehicle->number}}" required
+                            <x-input id="number" class="block mt-1 w-full bg-gray-100" aria-readonly readonly type="text" name="number" value="{{$vehicle->number}}" required
                                  />
                         </div>
-                        <!-- Number Details -->
+                        <!-- Seating Capacity -->
+                        <div>
+                            <x-label for="seating_capacity" :value="__('Seating Capacity')" />
+
+                            <x-input id="seating_capacity" class="block mt-1 w-full" type="number" name="seating_capacity"
+                                value="{{$vehicle->seating_capacity}}" required />
+                        </div>
+
+                        <!-- Rent detail -->
                         <div>
                             <x-label for="rent_per_day" :value="__('Rent Per Day')" />
             

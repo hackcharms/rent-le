@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
             $table->string('model',50);
-            $table->string('number',50);
-            $table->string('image');
+            $table->string('number',50)->unique();
+            $table->string('image')->nullable();
             $table->boolean('available')->default(0);
             $table->integer('seating_capacity');
             $table->float('rent_per_day',8,2,true);

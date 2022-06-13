@@ -24,9 +24,11 @@ class UpdateVehicleRequest extends FormRequest
      */
     public function rules()
     {
+        // dd($this->vehicle);
         return [
             'model'=>"required|string",
-            'number'=>"required|string",
+            // 'number'=>"required|string|unique:vehicles,number",
+            'seating_capacity'=>"required|numeric",
             'rent_per_day'=>"required|numeric",
         ];
     }

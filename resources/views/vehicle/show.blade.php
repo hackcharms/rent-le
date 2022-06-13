@@ -3,53 +3,71 @@
 <h1 class="text-xl p-2 py-4">
     show Vehicle
 </h1>
-{{-- {{$vehicle->orders}} --}}
-<div class="w-full lg:flex">
-    <div class="h-48 lg:w-[480px] lg:h-[480px] flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-        style="background-image: url('{{$vehicle->image}}')" title="{{$vehicle->model}}">
-    </div>
-    <div
-        class="w-full border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+<div class="py-4 flex justify-center">
+    <!-- This is an example component -->
+    <div class="rounded-xl border p-5 shadow-md w-full bg-white">
+        <div class="flex w-full items-center justify-between border-b pb-3">
+            <div class="flex items-center space-x-3">
+                {{-- <div class="h-8 w-8 rounded-full bg-slate-400 bg-[url('https://i.pravatar.cc/32')]"></div> --}}
+                <div class="text-lg font-bold text-slate-700">
+                    <h1 class="text-xl uppercase text-blue-500 py-4">
+                        Add Vehicle
+                    </h1>
 
-        <div class="mb-8 w-full">
-            <form action="{{route('order.store',$vehicle)}}" method="POST">
-                @csrf
-                <table class="w-full text-xl">
-                    <tbody>
-                        <tr>
-                            <td class="py-4">Model</td>
-                            <td>{{$vehicle->model}}</td>
-                        </tr>
-                        <tr>
-                            <td class="py-4">Number</td>
-                            <td>{{$vehicle->number}}</td>
-                        </tr>
-                        <tr>
-                            <td class="py-4">Charge/Day</td>
-                            <td>{{$vehicle->rent_per_day}}</td>
-                        </tr>
-                        <tr>
-                            <td class="py-4">
-                                <div class="flex">
-                                    <span
-                                        class="text-sm border-2 rounded-l-lg px-4 py-2 bg-gray-300 whitespace-no-wrap">Days<sup>*</sup>
-                                        :</span>
-                                    <div>
-                                        <input name="days" class="border-2 rounded-r-lg px-4 py-2 w-full
+                </div>
+            </div>
+            <div class="flex items-center space-x-8">
+                <a href="{{route('vehicle.edit',$vehicle)}}"
+                    class="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">Edit Details</a>
+                <a href="{{route('vehicle.index')}}"
+                    class="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">All Vehicles</a>
+            </div>
+        </div>
+
+        <div class="mt-4 mb-6">
+            <div class="w-full lg:flex">
+                <div
+                    class="w-full bg-white p-4 flex flex-col justify-between leading-normal">
+
+                    <div class="mb-8 w-full">
+                        <form action="{{route('order.store',$vehicle)}}" method="POST">
+                            @csrf
+                            <table class="w-full text-xl">
+                                <tbody>
+                                    <tr>
+                                        <td class="py-4">Model</td>
+                                        <td>{{$vehicle->model}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-4">Number</td>
+                                        <td>{{$vehicle->number}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-4">Charge/Day</td>
+                                        <td>{{$vehicle->rent_per_day}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-4">
+                                            <div class="flex">
+                                                <span
+                                                    class="text-sm border-2 rounded-l-lg px-4 py-2 bg-gray-300 whitespace-no-wrap">Days<sup>*</sup>
+                                                    :</span>
+                                                <div>
+                                                    <input name="days" class="border-2 rounded-r-lg px-4 py-2 w-full
                                             @error('days')
                                                 border-red-500
                                             @enderror
                                             " type="number" placeholder="Number of Days" min="1" />
-                                    </div>
-                                </div>
-                                <p class="text-red-400">
-                                    @error('days')
-                                    {{$message}}
-                                    @enderror
-                                </p>
-                            </td>
-                            <td>
-                                <button type="submit" class="inline-block py-2
+                                                </div>
+                                            </div>
+                                            <p class="text-red-400">
+                                                @error('days')
+                                                {{$message}}
+                                                @enderror
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <button type="submit" class="inline-block py-2
                                         ml-3
                                         px-7
                                         border border-[#E5E7EB]
@@ -59,22 +77,36 @@
                                         hover:border-blue-400 hover:bg-blue-400 hover:text-white
                                         transition
                                         ">
-                                    Book Now
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
+                                                Book Now
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-</div>
 <div>
     <div class="py-8">
-        <div>
-            <h2 class="text-2xl font-semibold leading-tight">{{$label??'Orders'}}</h2>
-        </div>
+        <div class="flex w-full items-center justify-between border-b pb-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="text-lg font-bold text-slate-700">
+                            <h1 class="text-xl uppercase text-blue-500 py-4">
+                                {{$label??'Orders'}}
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-8">
+                        <a href="{{route('order.index',$vehicle)}}"
+                            class="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">All Orders</a>
+                        {{-- <a href="{{route('vehicle.index')}}"
+                            class="rounded-2xl border bg-neutral-100 px-3 py-1 text-xs font-semibold">All Vehicles</a> --}}
+                    </div>
+                </div>
         <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
             <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
                 <table class="min-w-full leading-normal">

@@ -31,25 +31,32 @@
 
                 <!-- Model Details -->
                 <div>
-                    <x-label for="model" :value="__('Model')" />
+                    <x-label for="model" :value="__('Vehicle Model')" />
 
-                    <x-input id="model" class="block mt-1 w-full" type="text" name="model" value="{{$vehicle->model}}"
+                    <x-input id="model" class="block mt-1 w-full" type="text" name="model" value="{{old('model')}}"
                         required autofocus />
                 </div>
 
                 <!-- Number Details -->
                 <div>
-                    <x-label for="number" :value="__('Number')" />
+                    <x-label for="number" :value="__('Vehcile Number')" />
 
                     <x-input id="number" class="block mt-1 w-full" type="text" name="number"
-                        value="{{$vehicle->number}}" required />
+                        value="{{old('number')}}" required />
                 </div>
                 <!-- Number Details -->
                 <div>
                     <x-label for="rent_per_day" :value="__('Rent Per Day')" />
 
                     <x-input id="rent_per_day" class="block mt-1 w-full" type="number" name="rent_per_day"
-                        value="{{$vehicle->rent_per_day}}" required />
+                        value="{{old('rent_per_day')}}" required />
+                </div>
+                <!-- Seating Capacity -->
+                <div>
+                    <x-label for="seating_capacity" :value="__('Seating Capacity')" />
+
+                    <x-input id="seating_capacity" class="block mt-1 w-full" type="number" name="seating_capacity"
+                        value="{{old('seating_capacity')}}" required />
                 </div>
 
                 <div class="flex items-center justify-end mt-4">

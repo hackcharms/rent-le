@@ -49,11 +49,12 @@ class VehicleController extends Controller
      */
     public function store(StoreVehicleRequest $request)
     {
-        $this->authorize('store',Vehicle::class);
+        $this->authorize('create',Vehicle::class);
         $vehicle=new Vehicle();
         $vehicle->forceFill($request->validated());
+        $vehicle->owner_id=Auth::user()->id;
         $vehicle->save();
-        return route('vehicle.index');
+        return redirect()->route('vehicle.index');
     }
 
     /**
@@ -64,7 +65,6 @@ class VehicleController extends Controller
      */
     public function show(Vehicle $vehicle)
     {
-
         return view('vehicle.show',compact('vehicle'));
     }
 
@@ -76,7 +76,7 @@ class VehicleController extends Controller
      */
     public function edit(Vehicle $vehicle)
     {
-        $this->authorize('edit',$vehicle);
+        $this->authorize('update',$vehicle);
         return view('vehicle.edit', compact('vehicle'));
     }
 
@@ -92,7 +92,7 @@ class VehicleController extends Controller
         $this->authorize('update',$vehicle);
         $vehicle->forceFill($request->validated());
         $vehicle->save();
-        return view('vehicle.show',$vehicle);
+        return view('vehicle.show',compact('vehicle'));
     }
 
     /**
