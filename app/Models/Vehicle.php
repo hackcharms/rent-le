@@ -27,6 +27,9 @@ class Vehicle extends Model
     public function scopeTaken($query){
         return $query->where('available',self::TAKEN);
     }
+    public function lastOrder(){
+        return $this->hasOne(Order::class)->latestOfMany('rent_expired_at');
+    }
 
     public function Number():Attribute
     {

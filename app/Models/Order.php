@@ -9,6 +9,9 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $fillable=[
+        "available"
+    ];
     public $casts=[
         "rent_expired_at"=>"datetime"
     ];
