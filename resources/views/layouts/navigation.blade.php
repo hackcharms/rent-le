@@ -70,10 +70,10 @@
             </div>
             @else
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                <x-nav-link :href="route('login')" :active="request()->routeIs('login.*')">
+                <x-nav-link :href="route('login')" :active="request()->routeIs('login*')">
                     {{ __('Login') }}
                 </x-nav-link>
-                <x-nav-link :href="route('register')" :active="request()->routeIs('register.*')">
+                <x-nav-link :href="route('register')" :active="request()->routeIs('register*')">
                     {{ __('Register') }}
                 </x-nav-link>
             </div>
@@ -134,7 +134,7 @@
                 {{ __('Log In') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('register')"
-            :active="request()->routeIs('register.*')"
+            :active="request()->routeIs('register*')"
             >
                 {{ __('Register') }}
             </x-responsive-nav-link>

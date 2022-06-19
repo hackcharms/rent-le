@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+@extends('layouts.app')
 @section('section') 
 <x-auth-card>
         <x-slot name="logo">
